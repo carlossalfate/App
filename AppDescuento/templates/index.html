@@ -1,0 +1,119 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Descuentos App</title>
+  <link rel="stylesheet" href="{% static 'estilos.css' %}">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+</head>
+<body>
+  <header>
+    <h1>Descuentos App</h1>
+    <div class="auth-buttons-container">
+      <a href="{% url 'login' %}" class="btn btn-primary btn-auth">Iniciar sesión</a>
+      <a href="{% url 'signup' %}" class="btn btn-primary btn-auth">Registrese</a>
+      <a href="{% url 'profile' %}" class="btn btn-primary btn-auth">perfil</a>
+  </div>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="{% url 'index' %}">Descuentos App</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'index' %}">Inicio</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'lista_productos' %}">Lista de Productos</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'buscar_descuentos' %}">Buscar Descuentos</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'carrito_de_compras' %}">Carrito de Compras <img src="{% static 'img/carrito.png' %}" alt="Carrito" style="width:20px; height:auto;"></a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <div>
+      {% if user.is_authenticated %}
+          Bienvenido, {{ user.username }}
+          <a href="{% url 'logout' %}" class="btn btn-warning">Cerrar Sesión</a>
+    
+      {% endif %}
+  </div>
+
+  </header>
+
+  <main>
+    <h1>Bienvenido a tu App de descuentos favorita</h1>
+    <section id="intro">Aquí encontrarás todo lo que necesitas a precios mucho más baratos.</section>
+    
+    <!-- Sección de búsqueda actualizada -->
+    <section id="search-section">
+      <h2>Busca la categoría del descuento que necesitas</h2>
+      <form action="{% url 'buscar_productos' %}" method="get">
+        <label for="category-select">Categoría:</label>
+        <select id="category-select" name="categoria">
+          <option value="ropa">Ropa</option>
+          <option value="comida">Comida</option>
+          <option value="electrodomesticos">Electrodomésticos</option>
+          <option value="juegos">Juegos</option>
+        </select>
+        <button type="submit">Buscar</button>
+      </form>
+    </section>
+    
+    <section id="notifications-section">
+      <h2>Acceder a notificaciones</h2>
+      <button id="activar-notificaciones" class="btn btn-primary">Acceder</button>
+      <div id="notifications-container"></div>
+    </section>
+
+    <div id="overlay">
+      <div id="modal">
+        <h3>Notificaciones</h3>
+        <form id="registro-notificaciones-form" action="{% url 'enviar_correo' %}" method="post">
+          {% csrf_token %}
+          <div class="form-group">
+            <label for="nombre">Nombre:</label>
+            <input type="text" id="nombre" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label for="nombre">Categoria de interes:</label>
+            <input type="text" id="nombre" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label for="email">Correo Electrónico:</label>
+            <input type="email" id="email" name="email" class="form-control" required>
+          </div>
+          <button type="submit" class="btn btn-primary">Enviar</button>
+        </form>
+        <button id="cerrar-modal" class="btn btn-secondary">Cerrar</button>
+      </div>
+    </div>
+
+    <section id="quienes_somos">
+      <h2>Somos unos locos por los descuentos!</h2>
+      <p>Hola, somos un grupo de amigos apasionados por los descuentos. Nuestro objetivo es ayudarte a encontrar las mejores ofertas para que ahorres en todas tus compras.</p>
+    </section>
+  </main>
+
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <script src="{% static 'funciones.js' %}"></script>
+
+  <head>
+    <a href="{% url 'manual_usuario' %}" class="btn btn-info">Manual de Usuario</a>
+
+    
+</head>
+</body>
+</html>

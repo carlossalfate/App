@@ -1,0 +1,153 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Buscar Descuentos</title>
+</head>
+<body>
+  <header>
+    <h1>Buscar Descuentos</h1>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="{% url 'index' %}">Descuentos App</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'index' %}">Inicio</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'lista_productos' %}">Lista de Productos</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'buscar_descuentos' %}">Buscar Descuentos</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'carrito_de_compras' %}">Carrito de Compras <img src="{% static 'img/carrito.png' %}" alt="Carrito" style="width:20px; height:auto;"></a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <div>
+      {% if user.is_authenticated %}
+          Bienvenido, {{ user.username }}
+    
+      {% endif %}
+  </div>
+    <form id="search-form">
+      <input type="text" id="search-input" placeholder="Buscar descuentos...">
+      <button type="submit">Buscar</button>
+    </form>  
+  </header>
+
+  <main>
+    <div id="search-results">
+      {% for producto in productos %}
+          <div>
+              <h3>{{ producto.nombre }}</h3>
+              <p>Precio: {{ producto.precio }}</p>
+              <p>Descuento: {{ producto.descuento }}%</p>
+          </div>
+      {% empty %}
+          <p>No se encontraron descuentos.</p>
+      {% endfor %}
+  </div>
+    </div>
+    
+
+    <a href="{% url 'index' %}" class="btn btn-primary">Volver al Inicio</a>
+  </main>
+
+  <!-- Bootstrap JS, Popper.js, and jQuery -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+  <script>
+    // Simular una lista de 100 descuentos
+    const discounts = [];
+    for (let i = 1; i <= 100; i++) {
+      discounts.push({ id: i, title: 'Descuento ' + i, category: 'Categoría ' + (i % 5 + 1) });
+    }
+
+    const searchForm = document.getElementById('search-form');
+    const searchInput = document.getElementById('search-input');
+    const searchResults = document.getElementById('search-results');
+
+    // Función para realizar la búsqueda y mostrar los resultados
+    function searchDiscounts(query) {
+      const filteredDiscounts = discounts.filter(discount =>
+        discount.title.toLowerCase().includes(query.toLowerCase())
+      );
+
+      displaySearchResults(filteredDiscounts);
+    }
+
+    // Función para mostrar los resultados de la búsqueda
+    function displaySearchResults(results) {
+      searchResults.innerHTML = '';
+
+      results.forEach(discount => {
+        const resultDiv = document.createElement('div');
+        resultDiv.textContent = `${discount.title} - ${discount.category}`;
+        searchResults.appendChild(resultDiv);
+      });
+
+      if (results.length === 0) {
+        searchResults.textContent = 'No se encontraron descuentos.';
+      }
+    }
+
+    // Evento de envío del formulario de búsqueda
+    searchForm.addEventListener('submit', function (event) {
+      event.preventDefault();
+      const searchTerm = searchInput.value;
+      searchDiscounts(searchTerm);
+    });
+  </script>
+
+<head>
+  <!-- ... Tus otros enlaces y metaetiquetas ... -->
+  <style>
+      body {
+          background-color: #f7f7f7;
+      }
+      header {
+          background-color: #007bff;
+          color: white;
+          padding: 20px 0;
+          text-align: center;
+      }
+      #search-form {
+          margin: 20px auto;
+          width: 80%;
+          max-width: 600px;
+      }
+      #search-input {
+          margin-right: 10px;
+          width: 70%;
+      }
+      #search-results div {
+          background-color: white;
+          border: 1px solid #ddd;
+          border-radius: 5px;
+          margin-bottom: 20px;
+          padding: 15px;
+          box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+      }
+      .btn-primary {
+          background-color: #28a745;
+          border-color: #28a745;
+      }
+      .btn-primary:hover {
+          background-color: #218838;
+          border-color: #1e7e34;
+      }
+  </style>
+</head>
+</body>
+</html>

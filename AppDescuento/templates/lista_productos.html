@@ -1,0 +1,99 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Lista de Productos</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="{% static 'estilos.css' %}">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+  <header class="bg-primary text-white text-center py-4">
+    <h1>Lista de Productos</h1>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="{% url 'index' %}">Descuentos App</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'index' %}">Inicio</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'lista_productos' %}">Lista de Productos</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'buscar_descuentos' %}">Buscar Descuentos</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'carrito_de_compras' %}">Carrito de Compras <img src="{% static 'img/carrito.png' %}" alt="Carrito" style="width:20px; height:auto;"></a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <div>
+      {% if user.is_authenticated %}
+          Bienvenido, {{ user.username }}
+    
+      {% endif %}
+  </div>
+  </header>
+
+  <main class="container my-4">
+    <div class="row">
+      {% for producto in productos %}
+        <div class="col-md-4 mb-4">
+          <div class="card">
+            {% if producto.imagen_nombre %}
+            <img class="card-img-top" src="{% static 'img/'|add:producto.imagen_nombre %}" alt="{{ producto.nombre }}">
+            {% else %}
+            <img class="card-img-top" src="{% static 'img/desc.jpg' %}" alt="{{ producto.nombre }}">
+            {% endif %}
+            <div class="card-body">
+              <h5 class="card-title">{{ producto.nombre }}</h5>
+              <p class="card-text">${{ producto.precio }}</p>
+              <button onclick="addToCart({{ producto.id }}, '{{ producto.nombre }}', {{ producto.precio }}, {{ producto.descuento|default:'0' }}, '{% static 'img/'|add:producto.imagen_nombre %}')">Añadir al Carrito</button>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </main>
+
+  <a href="{% url 'carrito_de_compras' %}" class="btn btn-primary">Ir al Carrito de Compras</a>
+  </main>
+
+  <!-- Modal para confirmación de añadir al carrito -->
+  <div class="modal" id="cartModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Producto Añadido</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>El producto se ha añadido al carrito.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Seguir Comprando</button>
+          <a href="{% url 'carrito_de_compras' %}" class="btn btn-primary">Ir al Carrito</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <a href="{% url 'index' %}" class="btn btn-primary m-4">Volver al Inicio</a>
+
+  <!-- Bootstrap JS, Popper.js, and jQuery -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <script src="{% static 'funciones.js' %}"></script>
+</body>
+</html>

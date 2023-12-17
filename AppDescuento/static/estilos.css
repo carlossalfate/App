@@ -1,0 +1,176 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  color: #333;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
+.navbar {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+.nav-link {
+  color: #555;
+}
+
+.nav-link:hover {
+  color: #0088cc;
+}
+
+main {
+  margin: 0 auto;
+  max-width: 800px;
+}
+
+section {
+  margin-bottom: 20px;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+  color: #0088cc;
+}
+
+button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 3px;
+  background-color: #0088cc;
+  color: #fff;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #005580;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+#overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  justify-content: center;
+  align-items: center;
+}
+
+#modal {
+  background-color: white;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 90%;
+  max-width: 400px;
+}
+
+body {
+  background-color: #f7f7f7;
+}
+
+header {
+  background-color: #007bff;
+  color: white;
+}
+
+.card {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.btn-primary {
+  background-color: #28a745;
+  border-color: #28a745;
+}
+
+.btn-primary:hover {
+  background-color: #218838;
+  border-color: #1e7e34;
+}
+
+
+/*carrito de compras*/
+
+body {
+  background-color: #f7f7f7;
+}
+
+header {
+  background-color: #007bff;
+  color: white;
+  padding: 20px 0;
+  text-align: center;
+}
+
+.btn-success {
+  background-color: #28a745;
+  border-color: #28a745;
+}
+
+.btn-success:hover {
+  background-color: #218838;
+  border-color: #1e7e34;
+}
+
+.resumen-pago {
+  margin-top: 20px;
+}
+
+body {
+  background-color: #f7f7f7;
+}
+header {
+  background-color: #007bff;
+  color: white;
+  padding: 20px 0;
+  text-align: center;
+}
+#search-form {
+  margin: 20px auto;
+  width: 80%;
+  max-width: 600px;
+}
+#search-input {
+  margin-right: 10px;
+  width: 70%;
+}
+#search-results div {
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  padding: 15px;
+  box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+}
+.btn-primary {
+  background-color: #28a745;
+  border-color: #28a745;
+}
+.btn-primary:hover {
+  background-color: #218838;
+  border-color: #1e7e34;
+}
+
+/* Estilos para los botones de login y sign up */
+.btn-auth {
+  margin: 10px;
+  padding: 10px 20px;
+  font-size: 16px;
+}
+
+/* Contenedor para los botones */
+.auth-buttons-container {
+  text-align: center;
+  margin-top: 20px;
+}

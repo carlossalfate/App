@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <!-- Tus metadatos -->
+</head>
+<body>
+    <header>
+        <div class="container">
+            {% if user.is_authenticated %}
+                Bienvenido, {{ user.username }}
+                <a href="{% url 'logout' %}" class="btn btn-warning">Cerrar Sesión</a>
+            {% else %}
+                <a href="{% url 'login' %}">Iniciar sesión</a>
+            {% endif %}
+        </div>
+        
+        {% if messages %}
+            {% for message in messages %}
+                <div>{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+    </header>
+
+    <main>
+        {% block content %}
+        <!-- Contenido específico de la página -->
+        {% endblock %}
+    </main>
+</body>
+</html>

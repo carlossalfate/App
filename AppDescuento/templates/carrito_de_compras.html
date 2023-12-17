@@ -1,0 +1,108 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Carrito de Compras</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="{% static 'estilos.css' %}">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+  <header class="bg-primary text-white text-center py-4">
+    <h1>Carrito de Compras</h1>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="{% url 'index' %}">Descuentos App</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'index' %}">Inicio</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'lista_productos' %}">Lista de Productos</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'buscar_descuentos' %}">Buscar Descuentos</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'carrito_de_compras' %}">Carrito de Compras <img src="{% static 'img/carrito.png' %}" alt="Carrito" style="width:20px; height:auto;"></a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <div>
+      {% if user.is_authenticated %}
+          Bienvenido, {{ user.username }}
+    
+      {% endif %}
+  </div>
+  </header>
+
+  <main class="container my-4">
+    <div id="empty-cart-message" class="alert alert-info" style="display: none;">
+      No has añadido productos a tu carrito aún. ¡Qué estás esperando? ¡Añade productos!
+  </div>
+
+  <div id="cart-content" style="display: none;">
+    <table id="cart-table" class="table">
+      <thead>
+        <tr>
+          <th>Producto</th>
+          <th>Precio</th>
+          <th>Descuento</th>
+          <th>Total</th>
+          <th>Eliminar</th>
+        </tr>
+      </thead>
+      <tbody>
+        
+      </tbody>
+    </table>
+    <div class="resumen-pago">
+      <p>Descuento total: <span id="total-discount"></span></p>
+      <p>Total Ahorrado: <span id="total-saved"></span></p>
+      <p>Total a Pagar: <span id="total-price"></span></p>
+      <button class="btn btn-success" onclick="realizarPago()">Realizar Pago</button>
+    </div>
+  </main>
+    <!-- Modal de Pago -->
+    <div class="modal" id="paymentModal" tabindex="-1" role="dialog">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Forma de Pago</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form id="payment-form">
+              <div class="form-group">
+                <label for="payment-method">Selecciona Método de Pago:</label>
+                <select class="form-control" id="payment-method">
+                  <option value="debito">Débito</option>
+                  <option value="credito">Crédito</option>
+                </select>
+              </div>
+              <button type="submit" class="btn btn-success">Pagar</button>
+              <button type="button" class="btn btn-danger" data-dismiss="modal">Abortar Pago</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  <a href="{% url 'index' %}" class="btn btn-primary m-4">Volver al Inicio</a>
+
+
+  <script src="{% static 'funciones.js' %}"></script>
+  <!-- Bootstrap JS, Popper.js, and jQuery -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>

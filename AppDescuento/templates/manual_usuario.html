@@ -1,0 +1,71 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Manual de Usuario - Descuentos App</title>
+  <link rel="stylesheet" href="{% static 'estilos.css' %}">
+</head>
+<body>
+  <header>
+    <!-- Navegación -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="{% url 'index' %}">Descuentos App</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'index' %}">Inicio</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'lista_productos' %}">Lista de Productos</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'buscar_descuentos' %}">Buscar Descuentos</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'carrito_de_compras' %}">Carrito de Compras <img src="{% static 'img/carrito.png' %}" alt="Carrito" style="width:20px; height:auto;"></a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+
+  <main class="container">
+    <h1 class="my-4">Manual de Usuario</h1>
+
+    <section id="como-comprar">
+      <h2>¿Cómo comprar?</h2>
+      <p>Es sencillo! solo tienes que visualizar tu producto, añadirlo al carrito y pagar.</p>
+    </section>
+
+    <section id="gestionar-cuenta">
+      <h2>Gestión de Cuenta</h2>
+      <p>no es necesario logearte para comprar, basta con visitar la pagina y escoger el producto con el descuento que mas se acomode a tus intereses</p>
+    </section>
+
+    <section id="pagos-y-envios">
+      <h2>Pagos y Envíos</h2>
+      <p>Una vez realizado el pago, te contactaremos via mail para coordinar la entrega</p>
+    </section>
+
+    <section id="preguntas-frecuentes">
+      <h2>Preguntas Frecuentes</h2>
+      <p>¿Para que debo registrarme? R: El registro es para poder notificarte de los descuentos, si nos llega un descuento en la categoria que te intereso, te lo estaremos avisando por correo electronico para que ingreses inmediatamente y compres de inmediato sin perder la oportunidad.</p>
+    </section>
+
+    <section id="contacto">
+      <h2>Contacto</h2>
+      <p>descuentosApp19@gmail.com</p>
+    </section>
+  </main>
+
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>

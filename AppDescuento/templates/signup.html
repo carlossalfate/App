@@ -1,0 +1,61 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Regístrate - Descuentos App</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="{% static 'estilos.css' %}">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+  <header class="bg-primary text-white text-center py-4">
+    <h1>Descuentos App</h1>
+  </header>
+
+  <main class="container my-4">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <div class="card">
+          <div class="card-body">
+            <h2 class="card-title text-center">Regístrate</h2>
+            <form method="post" class="mt-4">
+              {% csrf_token %}
+              <div class="form-group">
+                {{ form.username.label_tag }}
+                {{ form.username }}
+                {% for error in form.username.errors %}
+                  <div class="alert alert-danger">{{ error }}</div>
+                {% endfor %}
+              </div>
+              <div class="form-group">
+                {{ form.password1.label_tag }}
+                {{ form.password1 }}
+                {% for error in form.password1.errors %}
+                  <div class="alert alert-danger">{{ error }}</div>
+                {% endfor %}
+              </div>
+              <div class="form-group">
+                {{ form.password2.label_tag }}
+                {{ form.password2 }}
+                {% for error in form.password2.errors %}
+                  <div class="alert alert-danger">{{ error }}</div>
+                {% endfor %}
+              </div>
+              <div class="text-center">
+                <button type="submit" class="btn btn-success">Regístrate</button>
+                <a href="{% url 'index' %}" class="btn btn-primary">Volver al Inicio</a>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>
